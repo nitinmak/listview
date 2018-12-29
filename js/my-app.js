@@ -14,7 +14,7 @@ var mainView = myApp.addView('.view-main', {
 
 function doclcoininf() {
 		 	$$.ajax({
-				 url: "http://107.170.3.207/kishan/10eleven/system_pin_history/",
+				 url: "https://unofox.xyz/kishan/10eleven/system_pin_history/",
 				cache: false,
 				type: "POST",
 				dataType: "json",
