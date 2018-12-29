@@ -10,8 +10,11 @@
             * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
                 * Enable inline JS: add 'unsafe-inline' to default-src
         -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+   <!--  <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+	-->
+	<meta http-equiv="Content-Security-Policy" content="default-src * gap: ws: https://ssl.gstatic.com;style-src * 'unsafe-inline' 'self' data: blob:;script-src * 'unsafe-inline' 'unsafe-eval' data: blob:;img-src * data: 'unsafe-inline' 'self' content:;fmedia-src mediastream;">
 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- Required meta tags-->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
@@ -31,96 +34,86 @@
     <link rel="stylesheet" href="lib/framework7/css/framework7.ios.colors.min.css">
 
     <link rel="stylesheet" href="css/styles.css">
+	
 </head>
 
 <body>
-     
-      <div class = "statusbar-overlay"></div>
-      <div class = "panel-overlay"></div>
-      
-      <div class = "panel panel-right panel-reveal">
-         <div class = "content-block">
-            <p>Contents goes here...</p>
-         </div>
-      </div>
-      
-      <div class = "views">
-         <div class = "view view-main">
-            <div class = "navbar">
-               <div class = "navbar-inner">
-                  <div class = "center sliding">My App</div>
-                  <div class = "right">
-                     <a href = "#" class = "link icon-only open-panel">
-                        <i class = "icon icon-bars"></i>
-                     </a>
-                  </div>
-               </div>
+    <!-- Status bar overlay for full screen mode (PhoneGap) -->
+    <div class="statusbar-overlay"></div>
+
+    <!-- Panels overlay-->
+    <div class="panel-overlay"></div>
+    <!-- Left panel with reveal effect-->
+    <div class="panel panel-left panel-reveal">
+        <div class="content-block">
+            <p>Left panel content goes here</p>
+        </div>
+    </div>
+
+    <!-- Views -->
+    <div class="views">
+        <!-- Your main view, should have "view-main" class -->
+        <div class="view view-main">
+            <!-- Top Navbar-->
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
+                    <div class="center sliding">Awesome App</div>
+                    <div class="right">
+                        <!--
+                          Right link contains only icon - additional "icon-only" class
+                          Additional "open-panel" class tells app to open panel when we click on this link
+                        -->
+                        <a href="#" class="link icon-only open-panel"><i class="icon icon-bars"></i></a>
+                    </div>
+                </div>
             </div>
-            
-            <div class = "pages navbar-through toolbar-through">
-               <div data-page = "index" class = "page">
-                  <div class = "page-content">
-                     <p>This is simple application...</p>
-                     <div class = "list-block">
-                        <ul>
-                           <li>
-                              <a href = "envirmnt_about.html" class = "">
-                                 <div class = "item-content">
-                                    <div class = "item-inner">
-                                       <div class = "item-title">Blog</div>
-                                    </div>
-                                 </div>
-                              </a>
-                           </li>
-                        </ul>
-                     </div>
-                  </div>
-               </div>
+            <!-- Pages container, because we use fixed-through navbar and toolbar, it has additional appropriate classes-->
+            <div class="pages navbar-through toolbar-through">
+                <!-- Page, "data-page" contains page name -->
+                <div data-page="index" class="page">
+                    <!-- Scrollable page content -->
+                    <div class="page-content">
+							   <ul class = "list-block">
+								 <li >abbr</li>
+								 <li>background</li>
+								 <li>canvas</li>
+								 <li>data-page</li>
+								 <li>e-resize</li>
+								 <li>far-left</li>
+								 <li>georgian</li>
+							   </ul>
+                            <!-- Link to another page -->
+                            <a href="about.html">About app</a>
+							<table class="data-table card">
+								<head>
+									<th class="label-cell">Date</th>
+									<th class="label-cell">Member Id</th>
+									<th class="numeric-cell">PIN NO</th>
+								</head>
+								<tbody id="coins_table">
+								</tbody>
+							</table>
+                        </div>
+						
+                    </div>
+               
             </div>
-            
-            <div class = "toolbar">
-               <div class = "toolbar-inner">
-                  <a href = "#" class = "link">First Link</a>
-                  <a href = "#" class = "link">Second Link</a>
-               </div>
+            <!-- Bottom Toolbar-->
+            <div class="toolbar">
+                <div class="toolbar-inner">
+                    <!-- Toolbar links -->
+                    <a href="#" class="link">Link 1</a>
+                    <a href="#" class="link">Link 2</a>
+                </div>
             </div>
-         </div>
-      </div>
-      
-      <script type = "text/javascript" 
-         src = "https://cdnjs.cloudflare.com/ajax/libs/framework7/1.4.2/js/framework7.min.js"></script>
-      
-      <script>
-         // here initialize the app
-         var myApp = new Framework7();
-
-         // If your using custom DOM library, then save it to $$ variable
-         var $$ = Dom7;
-
-         // Add the view
-         var mainView = myApp.addView('.view-main', {
-            
-            // enable the dynamic navbar for this view:
-            dynamicNavbar: true
-         });
-
-         //use the 'pageInit' event handler for all pages
-         $$(document).on('pageInit', function (e) {
-         
-            //get page data from event data
-            var page = e.detail.page;
-
-            if (page.name === 'blog') {
-            
-               // you will get below message in alert box when page with data-page attribute is equal to "about"
-               myApp.alert('Here its your About page');
-            }
-         })
-      </script>
+        </div>
+    </div>
 
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="lib/framework7/js/framework7.min.js"></script>
     <script type="text/javascript" src="js/my-app.js"></script>
+
 </body>
 
 </html>

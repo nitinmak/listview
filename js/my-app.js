@@ -1,6 +1,7 @@
 // Initialize app
 var myApp = new Framework7();
 
+var tttoken = "v7nirxu0scv0eistepradr";
 
 // If we need to use custom DOM library, let's save it to $$ variable:
 var $$ = Dom7;
@@ -11,9 +12,40 @@ var mainView = myApp.addView('.view-main', {
     dynamicNavbar: true
 });
 
+function doclcoininf() {
+		 	$$.ajax({
+				 url: "http://107.170.3.207/kishan/10eleven/system_pin_history/",
+				cache: false,
+				type: "POST",
+				dataType: "json",
+				data: { 'varsete': tttoken ,memberid : '100088'},
+				success: function(response){
+					console.log(response);
+					var htmlx = "";
+					$$.each(response["data"], function (key, value) {
+							htmlx += " <tr>  <td class='label-cell'>" + value.date + "</td> <td class='label-cell'>" + value.memberid + "</td> <td class='numeric-cell'>" + value.pinnumber + "</td></tr> ";
+						});
+					$$("#coins_table").html(htmlx);
+					//console.log(htmlx);	
+					//myApp.alert(' got the response');
+				},
+				error: function(responsex){
+					console.log(responsex);
+					myApp.alert(responsex.status+' got an error');
+					
+				}
+			});
+			
+			/* myApp.request.get(url='http://107.170.3.207/andf/index.php',success= function (data) {
+			//$$('.articles').html(data);
+			console.log(data+'Load was performed');
+		}); */
+}
+
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function() {
-    console.log("Device is ready!");
+    
+	doclcoininf();
 });
 
 
