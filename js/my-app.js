@@ -20,16 +20,18 @@ function doclcoininf() {
 				dataType: "json",
 				data: { 'varsete': tttoken ,memberid : '100088'},
 				success: function(response){
-					console.log(response);
+					
 					var htmlx = "";
 					$$.each(response["data"], function (key, value) {
 							htmlx += " <tr>  <td class='label-cell'>" + value.date + "</td> <td class='label-cell'>" + value.memberid + "</td> <td class='numeric-cell'>" + value.pinnumber + "</td></tr> ";
 						});
 					$$("#coins_table").html(htmlx);
+					
 					//console.log(htmlx);	
 					//myApp.alert(' got the response');
 				},
 				error: function(responsex){
+					$$("#pp").html(JSON.stringify(responsex));
 					console.log(responsex);
 					myApp.alert(responsex.status+' got an error');
 					
