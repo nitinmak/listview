@@ -14,17 +14,13 @@ var mainView = myApp.addView('.view-main', {
 
 function doclcoininf() {
 		 	$$.ajax({
-				 url: "https://unofox.xyz/kishan/10eleven/system_pin_history/",
+				// url: "https://unofox.xyz/kishan/10eleven/system_pin_history/",
+				url: "https://unofox.xyz/andf/index.php",
 				cache: false,
-				type: "POST",
-				dataType: "json",
-				data: { 'varsete': tttoken ,memberid : '100088'},
+				type: "GET",
 				success: function(response){
 					
-					var htmlx = "";
-					$$.each(response["data"], function (key, value) {
-							htmlx += " <tr>  <td class='label-cell'>" + value.date + "</td> <td class='label-cell'>" + value.memberid + "</td> <td class='numeric-cell'>" + value.pinnumber + "</td></tr> ";
-						});
+					var htmlx = "<tr><td class='label-cell'>" + response + "</td></tr>";
 					$$("#coins_table").html(htmlx);
 					
 					//console.log(htmlx);	
